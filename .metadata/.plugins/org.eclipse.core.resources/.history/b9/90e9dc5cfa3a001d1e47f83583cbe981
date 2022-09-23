@@ -1,0 +1,25 @@
+package com.orthofx;
+import java.util.*;
+
+public class HashMapToStoreMarks {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> marks = new HashMap<>();
+		String name;
+		int mark;
+		String ch;
+		Scanner s = new Scanner(System.in);
+		do {
+			System.out.println("Enter name: ");
+			name = s.nextLine();
+			System.out.println("Enter marks: ");
+			mark = s.nextInt();
+			marks.put(name,mark);
+			System.out.println("Do you want to add more students?(y/n)");
+			ch = s.next();
+		}while(ch.toLowerCase()=="y");
+		
+	}
+
+}
