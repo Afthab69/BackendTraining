@@ -1,0 +1,36 @@
+package com.orthofx;
+
+import java.util.*;
+
+public class RepeatingSequence {
+
+	static void substringEval(String str) {
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String str, sub = "", x="",exp="";
+		int k=1,start=0,end = 0,count=0,m=1,st=0,e=0;
+
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter String: ");
+		str = s.nextLine();
+		for (int i = 0; i < str.length(); ++i) {
+			if (str.charAt(i) == '[' && count==0) {
+				start = i;
+				count = count+1;
+			}
+			if(str.charAt(i)==']') {
+				end = i;
+			}
+		}
+		k = Integer.valueOf(Integer.parseInt(str.substring(0,start)));
+		sub = str.substring(start+1, end);
+		
+		for(int i=0;i<k;++i) {
+			x += sub;
+		}
+		System.out.println(x);
+	}
+}

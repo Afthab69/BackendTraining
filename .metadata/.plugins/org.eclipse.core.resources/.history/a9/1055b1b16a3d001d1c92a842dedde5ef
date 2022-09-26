@@ -1,0 +1,125 @@
+package com.orthofx;
+
+import java.util.*;
+
+public class RepeatingSequence {
+
+//	static String substringEval(String str) {
+//		int k = 0,i=0;
+//		StringBuilder stack = new StringBuilder(); 
+//		String val = "";
+//		while(i<str.length()) {
+//			char ch = str.charAt(i);
+//			i=i+1;
+//			if(Character.isLetter(ch)) {
+//				val = val+ ch;
+//			}
+//			else if(Character.isDigit(ch)) {
+//				k = k*10+Integer.valueOf(Integer.parseInt(""+ch));
+//			}
+//			else if(ch==']') {
+//				break;
+//			}
+//			else if(ch=='[') {
+//				for(int j=i;j<str.length();++j) {
+//					char c = str.charAt(j);
+//					if(c==']') {
+//						break;
+//					}
+//					stack.append(String.valueOf(""+c));
+//				}
+//				
+//				String sub = substringEval(stack.toString());
+//				while(k>1) {
+//					val=val+sub;
+//					k--;
+//				}
+//			}
+//			
+//		
+//		}
+//		return val;
+//	}
+	
+	static String decode(String str)
+    {
+        Stack<Integer> integerstack = new Stack<>();
+        Stack<Character> stringstack = new Stack<>();
+        String temp = "", result = "";
+      
+        
+        for (int i = 0; i < str.length(); i++)
+        {
+            int count = 0;
+            if (Character.isDigit(str.charAt(i)))
+            {
+                while (Character.isDigit(str.charAt(i)))
+                {
+                    count = count * 10 + str.charAt(i) - '0';
+                    i++;
+                }
+      
+                i--;
+                integerstack.push(count);
+            }
+            else if (str.charAt(i) == ']')
+            {
+                temp = "";
+                count = 0;
+      
+                if (!integerstack.isEmpty())
+                {
+                    count = integerstack.peek();
+                    integerstack.pop();
+                }
+      
+                while (!stringstack.isEmpty() && stringstack.peek()!='[' )
+                {
+                    temp = stringstack.peek() + temp;
+                    stringstack.pop();
+                }
+      
+                if (!stringstack.empty() && stringstack.peek() == '[')
+                    stringstack.pop();
+                for (int j = 0; j < count; j++)
+                    result = result + temp;   
+                for (int j = 0; j < result.length(); j++)
+                    stringstack.push(result.charAt(j));
+      
+                result = "";
+            }
+            else if (str.charAt(i) == '[')
+            {
+                if (Character.isDigit(str.charAt(i-1)))
+                    stringstack.push(str.charAt(i));
+      
+                else
+                {
+                    stringstack.push(str.charAt(i));
+                    integerstack.push(1);
+                }
+            }
+            else
+                stringstack.push(str.charAt(i));
+        }
+        while (!stringstack.isEmpty())
+        {
+            result = stringstack.peek() + result;
+            stringstack.pop();
+        }
+      
+        return result;
+    }
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String str,exp="";
+
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter String: ");
+		str = s.nextLine();
+		
+		exp = decode(str);
+		System.out.println(exp);
+	}
+}
