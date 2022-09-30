@@ -31,14 +31,12 @@ public class RepeatingSequence {
                 count = 0;
                 if (!intstack.isEmpty())
                 {
-                    count = intstack.peek();
-                    intstack.pop();
+                    count = intstack.pop();
                 }
       
                 while(!strstack.isEmpty() && strstack.peek()!='[' )
                 {
-                    temp = strstack.peek() + temp;
-                    strstack.pop();
+                    temp = strstack.pop() + temp;
                 }
       
                 if (!strstack.empty() && strstack.peek() == '[')
@@ -65,8 +63,7 @@ public class RepeatingSequence {
         }
         while(!strstack.isEmpty())
         {
-            result = strstack.peek() + result;
-            strstack.pop();
+            result = strstack.pop() + result;
         }
       
         return result;
